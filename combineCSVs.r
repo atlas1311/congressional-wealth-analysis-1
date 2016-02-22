@@ -13,7 +13,6 @@ congressIncomes <- data.frame()
 # lapply
 congressIncomes <- do.call(rbind, lapply(years, read.csv))
 
-# the difference in system.time() for the two methods is a measly .048 seconds, however lapply seems to be dealing with the numerics better for some reason
 ###########################################
 
 ############ Have a look ##################
@@ -77,7 +76,7 @@ states <- unique(congressIncomes$State)
 
 ######################################################################################################################################################
 
-# let's make some mutha fuckin plots.....but later.
+# initial plots
 library(ggplot2)
 library(lattice)
 year2004 <- subset(congressIncomes, year == "2004")
@@ -85,7 +84,6 @@ year2005 <- subset(congressIncomes, year == "2005")
 year2006 <- subset(congressIncomes, year == "2006")
 
 xyplot(AvgValue ~ Name, data = year2004)
-# ggplot will probably be better for this...this one looks like crap but it definately shows there are some outliers and the scale is a mess becuase ggplot2 is mean about that,
-# as asthetically pleasing as ggplot can be
+# ggplot will probably be better for this because of scaling issues
 plot1 <- ggplot(year2004, aes(y = AvgValue, x = Name), xlab = "Member of Congress", ylab = "Average Value") + geom_point() 
 plot1
